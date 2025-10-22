@@ -75,6 +75,7 @@ HPDF_Stream_WriteToStreamWithDeflate  (HPDF_Stream  src,
                                        HPDF_Encrypt  e);
 
 
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FILE_SUPPORT)
 HPDF_STATUS
 HPDF_FileReader_ReadFunc  (HPDF_Stream  stream,
                           HPDF_BYTE    *ptr,
@@ -102,7 +103,7 @@ HPDF_FileWriter_WriteFunc  (HPDF_Stream      stream,
 
 void
 HPDF_FileStream_FreeFunc  (HPDF_Stream  stream);
-
+#endif
 
 
 /*
@@ -753,6 +754,8 @@ HPDF_Stream_WriteToStream  (HPDF_Stream  src,
     return HPDF_OK;
 }
 
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FILE_SUPPORT)
+
 HPDF_Stream
 HPDF_FileReader_New  (HPDF_MMgr   mmgr,
                       const char  *fname)
@@ -999,6 +1002,8 @@ HPDF_FileStream_FreeFunc  (HPDF_Stream  stream)
 
     stream->attr = NULL;
 }
+
+#endif /* CONFIG_LIBHARU_FILE_SUPPORT */
 
 HPDF_STATUS
 HPDF_MemStream_InWrite  (HPDF_Stream      stream,

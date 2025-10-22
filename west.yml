@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: Apache-2.0
+
+manifest:
+  self:
+    path: libharu
+
+  remotes:
+    - name: zephyrproject-rtos
+      url-base: https://github.com/zephyrproject-rtos
+
+  projects:
+    - name: zephyr
+      remote: zephyrproject-rtos
+      revision: b04994206c693adfa9d5e4f1276a05b9d038a303
+      import:
+        name-allowlist:
+          - cmsis_6
+          - hal_stm32
+          - hal_nordic
+          - hal_nxp

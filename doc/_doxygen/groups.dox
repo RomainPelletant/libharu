@@ -1,0 +1,5 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+/**
+ * @defgroup libharu Libharu PDF library
+ * @brief Standard libharu API used by the Zephyr module.
+ */

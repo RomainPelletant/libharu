@@ -160,10 +160,13 @@ HPDF_ReadFromStream  (HPDF_Doc       pdf,
 HPDF_EXPORT(HPDF_STATUS)
 HPDF_ResetStream  (HPDF_Doc     pdf);
 
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FILE_SUPPORT)
 
 HPDF_EXPORT(HPDF_STATUS)
 HPDF_SaveToFile  (HPDF_Doc     pdf,
                   const char  *file_name);
+
+#endif /* CONFIG_LIBHARU_FILE_SUPPORT */
 
 
 HPDF_EXPORT(HPDF_STATUS)
@@ -296,6 +299,7 @@ HPDF_GetFont  (HPDF_Doc     pdf,
                const char  *font_name,
                const char  *encoding_name);
 
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FILE_SUPPORT)
 
 HPDF_EXPORT(const char*)
 HPDF_LoadType1FontFromFile  (HPDF_Doc     pdf,
@@ -319,6 +323,8 @@ HPDF_LoadTTFontFromFile2 (HPDF_Doc     pdf,
                           const char  *file_name,
                           HPDF_UINT    index,
                           HPDF_BOOL    embedding);
+
+#endif /* CONFIG_LIBHARU_FILE_SUPPORT */
 
 HPDF_EXPORT(const char*)
 HPDF_LoadTTFontFromMemory (HPDF_Doc         pdf,
@@ -801,6 +807,8 @@ HPDF_LoadPngImageFromMem  (HPDF_Doc     pdf,
                     const HPDF_BYTE    *buffer,
                           HPDF_UINT     size);
 
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FILE_SUPPORT)
+
 HPDF_EXPORT(HPDF_Image)
 HPDF_LoadPngImageFromFile (HPDF_Doc      pdf,
                            const char   *filename);
@@ -815,14 +823,20 @@ HPDF_EXPORT(HPDF_Image)
 HPDF_LoadJpegImageFromFile (HPDF_Doc      pdf,
                             const char   *filename);
 
+#endif /* CONFIG_LIBHARU_FILE_SUPPORT */
+
 HPDF_EXPORT(HPDF_Image)
 HPDF_LoadJpegImageFromMem   (HPDF_Doc      pdf,
                       const HPDF_BYTE     *buffer,
                             HPDF_UINT      size);
 
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FILE_SUPPORT)
+
 HPDF_EXPORT(HPDF_Image)
 HPDF_LoadU3DFromFile (HPDF_Doc      pdf,
                       const char   *filename);
+
+#endif /* CONFIG_LIBHARU_FILE_SUPPORT */
 
 HPDF_EXPORT(HPDF_Image)
 HPDF_LoadU3DFromMem  (HPDF_Doc      pdf,
@@ -839,6 +853,8 @@ HPDF_Image_LoadRaw1BitImageFromMem  (HPDF_Doc           pdf,
                           HPDF_BOOL          top_is_first);
 
 
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FILE_SUPPORT)
+
 HPDF_EXPORT(HPDF_Image)
 HPDF_LoadRawImageFromFile  (HPDF_Doc           pdf,
                             const char        *filename,
@@ -846,6 +862,7 @@ HPDF_LoadRawImageFromFile  (HPDF_Doc           pdf,
                             HPDF_UINT          height,
                             HPDF_ColorSpace    color_space);
 
+#endif /* CONFIG_LIBHARU_FILE_SUPPORT */
 
 HPDF_EXPORT(HPDF_Image)
 HPDF_LoadRawImageFromMem  (HPDF_Doc           pdf,
@@ -1003,6 +1020,8 @@ HPDF_Font_MeasureText (HPDF_Font          font,
 /*--------------------------------------------------------------------------*/
 /*----- attachments -------------------------------------------------------*/
 
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FILE_SUPPORT)
+
 HPDF_EXPORT(HPDF_EmbeddedFile)
 HPDF_AttachFile  (HPDF_Doc    pdf,
                   const char *file);
@@ -1035,6 +1054,7 @@ HPDF_EXPORT(HPDF_STATUS)
 HPDF_EmbeddedFile_SetLastModificationDate  (HPDF_EmbeddedFile  emfile,
                                             HPDF_Date          lastModificationDate);
 
+#endif /* CONFIG_LIBHARU_FILE_SUPPORT */
 
 /*--------------------------------------------------------------------------*/
 /*----- extended graphics state --------------------------------------------*/
@@ -1662,10 +1682,14 @@ HPDF_ICC_LoadIccFromMem (HPDF_Doc   pdf,
                         HPDF_Xref   xref,
                         int         numcomponent);
 
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FILE_SUPPORT)
+
 HPDF_EXPORT(HPDF_OutputIntent)
 HPDF_LoadIccProfileFromFile  (HPDF_Doc    pdf,
                               const char* icc_file_name,
                               int         numcomponent);
+
+#endif /* CONFIG_LIBHARU_FILE_SUPPORT */
 
 #ifdef __cplusplus
 }

@@ -1,4 +1,4 @@
-# Haru Free PDF Library [![Build Status](https://github.com/libharu/libharu/actions/workflows/cmake.yml/badge.svg)](https://github.com/libharu/libharu/actions/workflows/cmake.yml)
+# Haru Free PDF Library for Zephyr 
 
   **URL http://libharu.org/**
 
@@ -6,7 +6,35 @@
 
   **Copyright 2007-2009 (c) Antony Dovgal et al.**
 
-See INSTALL for instructions on how to install libHaru.
+Haru fork for Zephyr support as external module for PDF creation.
+Without filesystem support (only binary stream) and minimal confiruation, footprint:
+- 80KB flash.
+- 50KB RAM (heap).
+
+## Zephyr integration: Getting started
+
+Add this project as external module by appending your west.yml project file as:
+
+```
+manifest:
+  remotes:
+    - ...
+    - name: stp
+      url-base: https://github.com/sixtaupi
+
+  projects:
+    - ...
+    - name: zephyr_libharu_pdf_module
+      remote: stp
+      revision: zephyr
+      path: modules/lib/zephyr_libharu_pdf_module
+```
+
+Then, update your Zephyr workspace:
+
+```
+west update
+```
 
 
 # What is Haru Free PDF Library?

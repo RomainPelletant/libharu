@@ -4279,6 +4279,7 @@ typedef struct _HPDF_Base14FontDefData {
 
 
 static const HPDF_Base14FontDefData  HPDF_BUILTIN_FONTS[] = {
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FONT_COURIER)
     {
         HPDF_FONT_COURIER,
         CHAR_DATA_COURIER,
@@ -4319,6 +4320,8 @@ static const HPDF_Base14FontDefData  HPDF_BUILTIN_FONTS[] = {
         562,
         {-57, -250, 869, 801}
     },
+#endif
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FONT_HELVETICA)
     {
         HPDF_FONT_HELVETICA,
         CHAR_DATA_HELVETICA,
@@ -4359,6 +4362,8 @@ static const HPDF_Base14FontDefData  HPDF_BUILTIN_FONTS[] = {
         718,
         {-174, -228, 1114, 962}
     },
+#endif
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FONT_TIMES)
     {
         HPDF_FONT_TIMES_ROMAN,
         CHAR_DATA_TIMES_ROMAN,
@@ -4399,6 +4404,8 @@ static const HPDF_Base14FontDefData  HPDF_BUILTIN_FONTS[] = {
         669,
         {-200, -218, 996, 921}
     },
+#endif
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FONT_SYMBOL)
     {
         HPDF_FONT_SYMBOL,
         CHAR_DATA_SYMBOL,
@@ -4409,6 +4416,8 @@ static const HPDF_Base14FontDefData  HPDF_BUILTIN_FONTS[] = {
         0,
         {-180, -293, 1090, 1010}
     },
+#endif
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FONT_ZAPF_DINGBATS)
     {
         HPDF_FONT_ZAPF_DINGBATS,
         CHAR_DATA_ZAPF_DINGBATS,
@@ -4419,6 +4428,7 @@ static const HPDF_Base14FontDefData  HPDF_BUILTIN_FONTS[] = {
         0,
         {-1, -143, 981, 820}
     },
+#endif
     {
         NULL,
         NULL,

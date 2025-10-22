@@ -148,6 +148,7 @@ HPDF_Stream_WriteToStream  (HPDF_Stream   src,
                             HPDF_UINT     filter,
                             HPDF_Encrypt  e);
 
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FILE_SUPPORT)
 
 HPDF_Stream
 HPDF_FileReader_New  (HPDF_MMgr   mmgr,
@@ -158,6 +159,7 @@ HPDF_Stream
 HPDF_FileWriter_New  (HPDF_MMgr        mmgr,
                       const char  *fname);
 
+#endif /* CONFIG_LIBHARU_FILE_SUPPORT */
 
 HPDF_Stream
 HPDF_CallbackReader_New  (HPDF_MMgr              mmgr,

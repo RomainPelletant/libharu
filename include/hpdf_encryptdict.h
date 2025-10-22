@@ -27,6 +27,8 @@ extern "C" {
 /*---------------------------------------------------------------------------*/
 /*------ HPDF_EncryptDict ---------------------------------------------------*/
 
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_ENCRYPTION)
+
 HPDF_EncryptDict
 HPDF_EncryptDict_New  (HPDF_MMgr  mmgr,
                        HPDF_Xref  xref);
@@ -60,6 +62,47 @@ HPDF_EncryptDict_Prepare  (HPDF_EncryptDict  dict,
 
 HPDF_Encrypt
 HPDF_EncryptDict_GetAttr (HPDF_EncryptDict  dict);
+
+#else /* Zephyr: hpdf_encryptdict.c is not built, password APIs fail */
+
+static inline HPDF_EncryptDict
+HPDF_EncryptDict_New  (HPDF_MMgr  mmgr,
+                       HPDF_Xref  xref)
+{
+    (void)xref;
+    HPDF_SetError (mmgr->error, HPDF_UNSUPPORTED_FUNC, 0);
+    return NULL;
+}
+
+
+static inline HPDF_STATUS
+HPDF_EncryptDict_SetPassword  (HPDF_EncryptDict  dict,
+                               const char   *owner_passwd,
+                               const char   *user_passwd)
+{
+    (void)owner_passwd; (void)user_passwd;
+    return HPDF_SetError (dict->error, HPDF_UNSUPPORTED_FUNC, 0);
+}
+
+
+static inline HPDF_STATUS
+HPDF_EncryptDict_Prepare  (HPDF_EncryptDict  dict,
+                           HPDF_Dict         info,
+                           HPDF_Xref         xref)
+{
+    (void)info; (void)xref;
+    return HPDF_SetError (dict->error, HPDF_UNSUPPORTED_FUNC, 0);
+}
+
+
+static inline HPDF_Encrypt
+HPDF_EncryptDict_GetAttr (HPDF_EncryptDict  dict)
+{
+    (void)dict;
+    return NULL;
+}
+
+#endif
 
 #ifdef __cplusplus
 }

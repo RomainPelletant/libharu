@@ -70,6 +70,16 @@ set(
     hpdf_encoder_utf.c
 )
 
+# =======================================================================
+# zephyr specific
+# =======================================================================
+if(DEFINED ZEPHYR_BASE)
+  zephyr_library()
+  zephyr_library_compile_options(-Wno-double-promotion -Wno-unused-function)
+  zephyr_library_sources(${LIBHPDF_SRCS})
+  return()
+endif()
+
 set_property(SOURCE hpdf_shading.c hpdf_font_tt.c hpdf_fontdef_tt.c
   PROPERTY
     SKIP_UNITY_BUILD_INCLUSION ON)

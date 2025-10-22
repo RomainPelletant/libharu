@@ -28,6 +28,8 @@
 extern "C" {
 #endif
 
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_PDFA)
+
 HPDF_STATUS
 HPDF_PDFA_AppendOutputIntents(HPDF_Doc pdf, const char *iccname, HPDF_Dict iccdict);
 
@@ -47,6 +49,45 @@ HPDF_PDFA_ClearXmpExtensions(HPDF_Doc pdf);
 
 HPDF_STATUS
 HPDF_PDFA_GenerateID(HPDF_Doc);
+
+#else /* Zephyr: hpdf_pdfa.c is not built, PDF/A APIs fail */
+
+static inline HPDF_STATUS
+HPDF_PDFA_AppendOutputIntents(HPDF_Doc pdf, const char *iccname, HPDF_Dict iccdict)
+{
+    (void)iccname; (void)iccdict;
+    return HPDF_RaiseError(&pdf->error, HPDF_UNSUPPORTED_FUNC, 0);
+}
+
+static inline HPDF_STATUS
+HPDF_PDFA_SetPDFAConformance(HPDF_Doc pdf,
+                             HPDF_PDFAType pdfatype)
+{
+    (void)pdfatype;
+    return HPDF_RaiseError(&pdf->error, HPDF_UNSUPPORTED_FUNC, 0);
+}
+
+static inline HPDF_STATUS
+HPDF_PDFA_AddXmpMetadata(HPDF_Doc pdf)
+{
+    return HPDF_RaiseError(&pdf->error, HPDF_UNSUPPORTED_FUNC, 0);
+}
+
+static inline HPDF_STATUS
+HPDF_PDFA_AddXmpExtension(HPDF_Doc    pdf,
+                          const char *xmp_description)
+{
+    (void)xmp_description;
+    return HPDF_RaiseError(&pdf->error, HPDF_UNSUPPORTED_FUNC, 0);
+}
+
+static inline void
+HPDF_PDFA_ClearXmpExtensions(HPDF_Doc pdf)
+{
+    (void)pdf;
+}
+
+#endif
 #ifdef __cplusplus
 }
 #endif

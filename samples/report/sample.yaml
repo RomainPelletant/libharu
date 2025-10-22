@@ -1,0 +1,20 @@
+# SPDX-License-Identifier: Apache-2.0
+sample:
+  name: Libharu report
+  description: Generate a PDF using the native libharu API
+common:
+  tags:
+    - libharu
+  min_flash: 2048
+  min_ram: 256
+  integration_platforms:
+    - nucleo_u575zi_q
+    - qemu_cortex_a53
+    - mps2/an385
+  harness: console
+  harness_config:
+    type: one_line
+    regex:
+      - "PDF-END"
+tests:
+  sample.libharu.report: {}

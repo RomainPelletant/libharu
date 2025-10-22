@@ -1,0 +1,117 @@
+# Copyright (c) 2025 Romain Pelletant
+# SPDX-License-Identifier: Apache-2.0
+
+config ZEPHYR_LIBHARU_MODULE
+	bool
+
+menuconfig LIBHARU
+	bool "Libharu PDF library"
+	depends on COMMON_LIBC_MALLOC
+	depends on COMMON_LIBC_MALLOC_ARENA_SIZE >= 30000
+	help
+	  This option enables libharu PDF library
+	  support.
+
+if LIBHARU
+
+config LIBHARU_FILE_SUPPORT
+	bool "Enable file support"
+	default n
+	depends on FILE_SYSTEM
+	help
+	  Enable libharu's file APIs (HPDF_SaveToFile() and the *FromFile()
+	  loaders). File access goes through Zephyr's file system API, so
+	  paths are mount paths such as "/lfs/report.pdf" and the application
+	  must mount the file system first.
+
+menu "PDF components"
+
+config LIBHARU_FONT_HELVETICA
+	bool "Helvetica family"
+	default y
+	help
+	  Include Helvetica and its bold/oblique variants.
+
+config LIBHARU_FONT_COURIER
+	bool "Courier family"
+	default y
+	help
+	  Include Courier and its bold/oblique variants.
+
+config LIBHARU_FONT_TIMES
+	bool "Times family"
+	default y
+	help
+	  Include Times and its bold/italic variants.
+
+config LIBHARU_FONT_SYMBOL
+	bool "Symbol font"
+	default y
+	help
+	  Include the built-in Symbol font.
+
+config LIBHARU_FONT_ZAPF_DINGBATS
+	bool "ZapfDingbats font"
+	default y
+	help
+	  Include the built-in ZapfDingbats font.
+
+config LIBHARU_TRUETYPE
+	bool "TrueType and composite fonts"
+	default y
+	help
+	  Enable loading TrueType fonts from memory or files and the shared
+	  Type0/CID font engine. Required by UTF-8 and Asian font support.
+
+config LIBHARU_ENCODING_UTF
+	bool "UTF-8 encoding"
+	default y
+	depends on LIBHARU_TRUETYPE
+	help
+	  Enable HPDF_UseUTFEncodings(). Requires a suitable TrueType font.
+
+config LIBHARU_FONT_JP
+	bool "Japanese fonts and encodings"
+	default y
+	depends on LIBHARU_TRUETYPE
+	help
+	  Enable HPDF_UseJPFonts() and HPDF_UseJPEncodings().
+
+config LIBHARU_FONT_KR
+	bool "Korean fonts and encodings"
+	default y
+	depends on LIBHARU_TRUETYPE
+	help
+	  Enable HPDF_UseKRFonts() and HPDF_UseKREncodings().
+
+config LIBHARU_FONT_CNS
+	bool "Simplified Chinese fonts and encodings"
+	default y
+	depends on LIBHARU_TRUETYPE
+	help
+	  Enable HPDF_UseCNSFonts() and HPDF_UseCNSEncodings().
+
+config LIBHARU_FONT_CNT
+	bool "Traditional Chinese fonts and encodings"
+	default y
+	depends on LIBHARU_TRUETYPE
+	help
+	  Enable HPDF_UseCNTFonts() and HPDF_UseCNTEncodings().
+
+config LIBHARU_ENCRYPTION
+	bool "PDF password encryption"
+	default y
+	help
+	  Enable the existing libharu password and permission APIs.
+
+config LIBHARU_PDFA
+	bool "PDF/A and XMP metadata"
+	default y
+	help
+	  Enable PDF/A conformance, XMP extensions and output intents.
+	  The shared MD5 implementation is retained for document identifiers,
+	  even when password encryption is disabled.
+
+endmenu
+
+endif # LIBHARU

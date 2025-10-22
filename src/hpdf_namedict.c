@@ -189,6 +189,8 @@ HPDF_NameTree_Validate  (HPDF_NameTree  nametree)
 
 /*------- EmbeddedFile -------*/
 
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FILE_SUPPORT)
+
 HPDF_EmbeddedFile
 HPDF_EmbeddedFile_New  (HPDF_MMgr  mmgr,
                         HPDF_Xref  xref,
@@ -400,3 +402,5 @@ HPDF_EmbeddedFile_SetLastModificationDate  (HPDF_EmbeddedFile  emfile,
 
     return HPDF_Info_SetInfoDateAttr(params, HPDF_INFO_MOD_DATE, lastModificationDate);
 }
+
+#endif /* CONFIG_LIBHARU_FILE_SUPPORT */

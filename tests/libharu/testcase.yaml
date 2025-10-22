@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: Apache-2.0
+common:
+  tags:
+    - libharu
+  min_flash: 2048
+  min_ram: 640
+  integration_platforms:
+    - nucleo_u575zi_q
+    - qemu_cortex_a53
+    - mps2/an385
+tests:
+  libraries.libharu: {}
+  libraries.libharu.minimal:
+    extra_args: EXTRA_CONF_FILE=minimal.conf
+  libraries.libharu.pdfa_without_encryption:
+    extra_args: EXTRA_CONF_FILE=pdfa.conf
+  libraries.libharu.truetype:
+    extra_args: EXTRA_CONF_FILE=truetype.conf
+  libraries.libharu.no_builtin_fonts:
+    extra_args: EXTRA_CONF_FILE="minimal.conf;no_builtin_fonts.conf"
+  libraries.libharu.file_support:
+    extra_args:
+      - EXTRA_CONF_FILE=file_support.conf
+      - EXTRA_DTC_OVERLAY_FILE=ramdisk.overlay

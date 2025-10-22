@@ -317,6 +317,7 @@ typedef struct _HPDF_TTFontDefAttr_Rec {
 } HPDF_TTFontDefAttr_Rec;
 
 
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_TRUETYPE)
 
 HPDF_FontDef
 HPDF_TTFontDef_New (HPDF_MMgr   mmgr);
@@ -398,6 +399,58 @@ HPDF_STATUS
 HPDF_CIDFontDef_ChangeStyle   (HPDF_FontDef    fontdef,
                                HPDF_BOOL       bold,
                                HPDF_BOOL       italic);
+
+#else /* Zephyr: TrueType and CID font sources are not built */
+
+static inline HPDF_FontDef
+HPDF_TTFontDef_Load  (HPDF_MMgr     mmgr,
+                      HPDF_Stream   stream,
+                      HPDF_BOOL     embedding)
+{
+    (void)stream; (void)embedding;
+    HPDF_SetError (mmgr->error, HPDF_UNSUPPORTED_FUNC, 0);
+    return NULL;
+}
+
+
+static inline HPDF_FontDef
+HPDF_TTFontDef_Load2  (HPDF_MMgr     mmgr,
+                       HPDF_Stream   stream,
+                       HPDF_UINT     index,
+                       HPDF_BOOL     embedding)
+{
+    (void)stream; (void)index; (void)embedding;
+    HPDF_SetError (mmgr->error, HPDF_UNSUPPORTED_FUNC, 0);
+    return NULL;
+}
+
+
+static inline HPDF_INT16
+HPDF_TTFontDef_GetCharWidth  (HPDF_FontDef   fontdef,
+                              HPDF_UINT16    unicode)
+{
+    (void)fontdef; (void)unicode;
+    return 0;
+}
+
+
+static inline void
+HPDF_TTFontDef_SetTagName  (HPDF_FontDef   fontdef,
+                            char     *tag)
+{
+    (void)fontdef; (void)tag;
+}
+
+
+static inline HPDF_INT16
+HPDF_CIDFontDef_GetCIDWidth  (HPDF_FontDef  fontdef,
+                              HPDF_UINT16   cid)
+{
+    (void)fontdef; (void)cid;
+    return 0;
+}
+
+#endif
 
 #ifdef __cplusplus
 }

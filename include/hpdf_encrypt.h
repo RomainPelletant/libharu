@@ -134,6 +134,9 @@ void
 HPDF_Encrypt_CreateEncryptionKey  (HPDF_Encrypt  attr);
 
 
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_ENCRYPTION) || \
+    defined(CONFIG_LIBHARU_PDFA)
+
 void
 HPDF_Encrypt_InitKey  (HPDF_Encrypt  attr,
                        HPDF_UINT32       object_id,
@@ -149,6 +152,35 @@ HPDF_Encrypt_CryptBuf  (HPDF_Encrypt  attr,
                         const HPDF_BYTE   *src,
                         HPDF_BYTE         *dst,
                         HPDF_UINT         len);
+
+#else /* Zephyr: hpdf_encrypt.c is not built, the encryptor is always NULL */
+
+static inline void
+HPDF_Encrypt_InitKey  (HPDF_Encrypt  attr,
+                       HPDF_UINT32       object_id,
+                       HPDF_UINT16       gen_no)
+{
+    (void)attr; (void)object_id; (void)gen_no;
+}
+
+
+static inline void
+HPDF_Encrypt_Reset  (HPDF_Encrypt  attr)
+{
+    (void)attr;
+}
+
+
+static inline void
+HPDF_Encrypt_CryptBuf  (HPDF_Encrypt  attr,
+                        const HPDF_BYTE   *src,
+                        HPDF_BYTE         *dst,
+                        HPDF_UINT         len)
+{
+    (void)attr; (void)src; (void)dst; (void)len;
+}
+
+#endif
 
 #ifdef __cplusplus
 }

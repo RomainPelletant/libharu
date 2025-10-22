@@ -91,6 +91,8 @@ HPDF_Type1Font_New  (HPDF_MMgr        mmgr,
                      HPDF_Encoder     encoder,
                      HPDF_Xref        xref);
 
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_TRUETYPE)
+
 HPDF_Font
 HPDF_TTFont_New  (HPDF_MMgr        mmgr,
                   HPDF_FontDef     fontdef,
@@ -102,6 +104,32 @@ HPDF_Type0Font_New  (HPDF_MMgr        mmgr,
                      HPDF_FontDef     fontdef,
                      HPDF_Encoder     encoder,
                      HPDF_Xref        xref);
+
+#else /* Zephyr: TrueType and CID font sources are not built */
+
+static inline HPDF_Font
+HPDF_TTFont_New  (HPDF_MMgr        mmgr,
+                  HPDF_FontDef     fontdef,
+                  HPDF_Encoder     encoder,
+                  HPDF_Xref        xref)
+{
+    (void)fontdef; (void)encoder; (void)xref;
+    HPDF_SetError (mmgr->error, HPDF_UNSUPPORTED_FONT_TYPE, 0);
+    return NULL;
+}
+
+static inline HPDF_Font
+HPDF_Type0Font_New  (HPDF_MMgr        mmgr,
+                     HPDF_FontDef     fontdef,
+                     HPDF_Encoder     encoder,
+                     HPDF_Xref        xref)
+{
+    (void)fontdef; (void)encoder; (void)xref;
+    HPDF_SetError (mmgr->error, HPDF_UNSUPPORTED_FONT_TYPE, 0);
+    return NULL;
+}
+
+#endif
 
 
 HPDF_BOOL

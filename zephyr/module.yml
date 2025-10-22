@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0
+name: libharu
+build:
+  cmake: zephyr
+  kconfig: Kconfig
+# Upstream identity for `west spdx` and vulnerability scanners. This fork is
+# based on libharu v2.4.5 plus upstream commits up to f27125c.
+# Update both references when rebasing on a newer upstream.
+security:
+  external-references:
+    - cpe:2.3:a:takeshi_kanno:haru_free_pdf_library:2.4.5:*:*:*:*:*:*:*
+    - pkg:github/libharu/libharu@f27125cb3829fc8c634c2a9c920b53b4fbe0b81f

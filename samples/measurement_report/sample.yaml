@@ -1,0 +1,17 @@
+# SPDX-License-Identifier: Apache-2.0
+sample:
+  name: Libharu measurement report
+  description: Styled two-page measurement report with a chart and a data table
+common:
+  tags:
+    - libharu
+  integration_platforms:
+    - qemu_cortex_a53
+    - mps2/an385
+  harness: console
+  harness_config:
+    type: one_line
+    regex:
+      - "PDF-END"
+tests:
+  sample.libharu.measurement_report: {}

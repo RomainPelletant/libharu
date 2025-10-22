@@ -766,6 +766,7 @@ HPDF_ResetStream  (HPDF_Doc     pdf)
     return HPDF_Stream_Seek (pdf->stream, 0, HPDF_SEEK_SET);
 }
 
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FILE_SUPPORT)
 
 HPDF_EXPORT(HPDF_STATUS)
 HPDF_SaveToFile  (HPDF_Doc     pdf,
@@ -789,6 +790,7 @@ HPDF_SaveToFile  (HPDF_Doc     pdf,
     return HPDF_CheckError (&pdf->error);
 }
 
+#endif /* CONFIG_LIBHARU_FILE_SUPPORT */
 
 HPDF_EXPORT(HPDF_Page)
 HPDF_GetCurrentPage  (HPDF_Doc   pdf)
@@ -1414,6 +1416,7 @@ HPDF_GetFont  (HPDF_Doc          pdf,
     return font;
 }
 
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FILE_SUPPORT)
 
 HPDF_EXPORT(const char*)
 HPDF_LoadType1FontFromFile  (HPDF_Doc     pdf,
@@ -1455,6 +1458,7 @@ HPDF_LoadType1FontFromFile  (HPDF_Doc     pdf,
     return ret;
 }
 
+#endif /* CONFIG_LIBHARU_FILE_SUPPORT */
 
 static const char*
 LoadType1FontFromStream  (HPDF_Doc      pdf,
@@ -1485,6 +1489,8 @@ LoadType1FontFromStream  (HPDF_Doc      pdf,
     }
     return NULL;
 }
+
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FILE_SUPPORT)
 
 HPDF_EXPORT(HPDF_FontDef)
 HPDF_GetTTFontDefFromFile (HPDF_Doc      pdf,
@@ -1536,6 +1542,7 @@ HPDF_LoadTTFontFromFile (HPDF_Doc         pdf,
     return ret;
 }
 
+#endif /* CONFIG_LIBHARU_FILE_SUPPORT */
 
 static const char*
 LoadTTFontFromStream (HPDF_Doc         pdf,
@@ -1584,6 +1591,7 @@ LoadTTFontFromStream (HPDF_Doc         pdf,
     return def->base_font;
 }
 
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FILE_SUPPORT)
 
 /**
 * @brief Load the specified font from a font collection file.
@@ -1620,6 +1628,7 @@ HPDF_LoadTTFontFromFile2 (HPDF_Doc         pdf,
     return ret;
 }
 
+#endif /* CONFIG_LIBHARU_FILE_SUPPORT */
 
 static const char*
 LoadTTFontFromStream2 (HPDF_Doc         pdf,
@@ -1702,6 +1711,7 @@ HPDF_LoadTTFontFromMemory (HPDF_Doc         pdf,
     return ret;
 }
 
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FILE_SUPPORT)
 
 HPDF_EXPORT(HPDF_Image)
 HPDF_LoadRawImageFromFile  (HPDF_Doc          pdf,
@@ -1739,6 +1749,7 @@ HPDF_LoadRawImageFromFile  (HPDF_Doc          pdf,
     return image;
 }
 
+#endif /* CONFIG_LIBHARU_FILE_SUPPORT */
 
 HPDF_EXPORT(HPDF_Image)
 HPDF_LoadRawImageFromMem  (HPDF_Doc           pdf,
@@ -1772,6 +1783,7 @@ HPDF_LoadRawImageFromMem  (HPDF_Doc           pdf,
     return image;
 }
 
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FILE_SUPPORT)
 
 HPDF_EXPORT(HPDF_Image)
 HPDF_LoadJpegImageFromFile  (HPDF_Doc     pdf,
@@ -1801,6 +1813,8 @@ HPDF_LoadJpegImageFromFile  (HPDF_Doc     pdf,
 
     return image;
 }
+
+#endif /* CONFIG_LIBHARU_FILE_SUPPORT */
 
 HPDF_EXPORT(HPDF_Image)
 HPDF_LoadJpegImageFromMem  (HPDF_Doc    pdf,
@@ -2411,6 +2425,8 @@ HPDF_AddColorspaceFromProfile  (HPDF_Doc pdf,
     return iccentry;
 }
 
+#if !defined(__ZEPHYR__) || defined(CONFIG_LIBHARU_FILE_SUPPORT)
+
 HPDF_EXPORT(HPDF_OutputIntent)
 HPDF_LoadIccProfileFromFile (HPDF_Doc pdf,
                              const char* icc_file_name,
@@ -2441,6 +2457,8 @@ HPDF_LoadIccProfileFromFile (HPDF_Doc pdf,
 
     return iccentry;
 }
+
+#endif /* CONFIG_LIBHARU_FILE_SUPPORT */
 
 HPDF_EXPORT(HPDF_STATUS)
 HPDF_SetPDFAConformance  (HPDF_Doc      pdf,

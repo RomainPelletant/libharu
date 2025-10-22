@@ -50,6 +50,11 @@
 #define HPDF_SIN                    sin
 #define HPDF_COS                    cos
 
+#ifdef __ZEPHYR__
+/* Zephyr: file macros use the fs API instead of stdio (see zephyr/). */
+#include "hpdf_zephyr_fs.h"
+#endif
+
 /*----------------------------------------------------------------------------*/
 /*----- parameters in relation to performance --------------------------------*/
 

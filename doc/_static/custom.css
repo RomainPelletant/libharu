@@ -1,0 +1,7 @@
+/* SPDX-License-Identifier: Apache-2.0 */
+
+/* The RTD theme keeps table cells on one line; let option descriptions wrap. */
+.wy-table-responsive table td,
+.wy-table-responsive table th {
+    white-space: normal;
+}
