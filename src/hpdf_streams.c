@@ -75,33 +75,33 @@ HPDF_Stream_WriteToStreamWithDeflate  (HPDF_Stream  src,
                                        HPDF_Encrypt  e);
 
 
-HPDF_STATUS
-HPDF_FileReader_ReadFunc  (HPDF_Stream  stream,
-                          HPDF_BYTE    *ptr,
-                          HPDF_UINT    *siz);
+// HPDF_STATUS
+// HPDF_FileReader_ReadFunc  (HPDF_Stream  stream,
+//                           HPDF_BYTE    *ptr,
+//                           HPDF_UINT    *siz);
 
 
-HPDF_STATUS
-HPDF_FileReader_SeekFunc  (HPDF_Stream      stream,
-                           HPDF_INT         pos,
-                           HPDF_WhenceMode  mode);
+// HPDF_STATUS
+// HPDF_FileReader_SeekFunc  (HPDF_Stream      stream,
+//                            HPDF_INT         pos,
+//                            HPDF_WhenceMode  mode);
 
 
-HPDF_INT32
-HPDF_FileStream_TellFunc  (HPDF_Stream  stream);
+// HPDF_INT32
+// HPDF_FileStream_TellFunc  (HPDF_Stream  stream);
 
 
-HPDF_UINT32
-HPDF_FileStream_SizeFunc  (HPDF_Stream  stream);
+// HPDF_UINT32
+// HPDF_FileStream_SizeFunc  (HPDF_Stream  stream);
 
 
-HPDF_STATUS
-HPDF_FileWriter_WriteFunc  (HPDF_Stream      stream,
-                            const HPDF_BYTE  *ptr,
-                            HPDF_UINT        siz);
+// HPDF_STATUS
+// HPDF_FileWriter_WriteFunc  (HPDF_Stream      stream,
+//                             const HPDF_BYTE  *ptr,
+//                             HPDF_UINT        siz);
 
-void
-HPDF_FileStream_FreeFunc  (HPDF_Stream  stream);
+// void
+// HPDF_FileStream_FreeFunc  (HPDF_Stream  stream);
 
 
 
@@ -753,6 +753,8 @@ HPDF_Stream_WriteToStream  (HPDF_Stream  src,
     return HPDF_OK;
 }
 
+#if CONFIG_LIBHARU_FILE_SUPPORT
+
 HPDF_Stream
 HPDF_FileReader_New  (HPDF_MMgr   mmgr,
                       const char  *fname)
@@ -999,6 +1001,8 @@ HPDF_FileStream_FreeFunc  (HPDF_Stream  stream)
 
     stream->attr = NULL;
 }
+
+#endif /* CONFIG_LIBHARU_FILE_SUPPORT */
 
 HPDF_STATUS
 HPDF_MemStream_InWrite  (HPDF_Stream      stream,

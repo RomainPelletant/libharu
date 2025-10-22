@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
+cmake_policy(SET CMP0077 NEW)
+
 file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/include/hpdf_version.h HPDF_VERSION_H_CONTENTS REGEX " HPDF_(MAJOR|MINOR|BUGFIX)_VERSION ")
 string(REGEX MATCH "MAJOR_VERSION [0-9]+"  HPDF_MAJOR_VERSION  ${HPDF_VERSION_H_CONTENTS})
 string(REGEX MATCH "MINOR_VERSION [0-9]+"  HPDF_MINOR_VERSION  ${HPDF_VERSION_H_CONTENTS})
@@ -13,7 +15,9 @@ project(libharu
     DESCRIPTION "libHaru is a free, cross platform, open source library for generating PDF files."
     LANGUAGES C)
 
-include(GNUInstallDirs)
+if(NOT DEFINED ZEPHYR_BASE)
+  include(GNUInstallDirs)
+endif()
 
 
 # Location where the haru cmake build system first looks for cmake modules
@@ -46,14 +50,16 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 # =======================================================================
 include(summary)
 
-# check zlib availability
-find_package(ZLIB)
+if(NOT DEFINED ZEPHYR_BASE)
+  # check zlib availability
+  find_package(ZLIB)
 
-# check png availability
-find_package(PNG)
+  # check png availability
+  find_package(PNG)
 
-# Find math library, sometimes needs to be explicitly linked against
-find_library(M_LIB m)
+  # Find math library, sometimes needs to be explicitly linked against
+  find_library(M_LIB m)
+endif()
 
 # =======================================================================
 # configure header files, add compiler flags
@@ -89,6 +95,17 @@ add_subdirectory(src)
 if(LIBHPDF_EXAMPLES)
     add_subdirectory(demo)
 endif(LIBHPDF_EXAMPLES)
+
+# =======================================================================
+# zephyr specific
+# =======================================================================
+if(DEFINED ZEPHYR_BASE)
+  zephyr_include_directories(
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_BINARY_DIR}/include
+  )
+  return()
+endif()
 
 # =======================================================================
 # installation configuration

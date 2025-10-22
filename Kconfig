@@ -1,0 +1,21 @@
+# Copyright (c) 2025 Romain Pelletant
+# SPDX-License-Identifier: Apache-2.0
+
+config ZEPHYR_LIBHARU_MODULE
+	bool
+
+config LIBHARU
+	bool "Libharu PDF library"
+	depends on CONFIG_COMMON_LIBC_MALLOC
+	depends on CONFIG_COMMON_LIBC_MALLOC_ARENA_SIZE > 50000
+	help
+	  This option enables libharu PDF library
+	  support.
+
+config LIBHARU_FILE_SUPPORT
+	bool "Enable file support"
+	default n
+	depends on FILE_SYSTEM
+	help
+	  This option enables file support API library.
+	  It requires filesystem support in the project.

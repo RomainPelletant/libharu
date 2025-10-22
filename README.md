@@ -1,4 +1,4 @@
-# Haru Free PDF Library [![Build Status](https://github.com/libharu/libharu/actions/workflows/cmake.yml/badge.svg)](https://github.com/libharu/libharu/actions/workflows/cmake.yml)
+# Haru Free PDF Library for Zephyr 
 
   **URL http://libharu.org/**
 
@@ -6,8 +6,10 @@
 
   **Copyright 2007-2009 (c) Antony Dovgal et al.**
 
-See INSTALL for instructions on how to install libHaru.
-
+Haru fork for Zephyr support for PDF creation.
+Without filesystem support (only binary stream), footprint:
+- 80KB flash.
+- 50KB RAM (heap).
 
 # What is Haru Free PDF Library?
 

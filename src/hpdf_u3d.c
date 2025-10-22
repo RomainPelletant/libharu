@@ -62,6 +62,7 @@ static HPDF_STATUS Get3DStreamType (HPDF_Stream  stream, const char **type)
 	return HPDF_INVALID_U3D_DATA;
 }
 
+#if CONFIG_LIBHARU_FILE_SUPPORT
 
 HPDF_EXPORT(HPDF_Image)
 HPDF_LoadU3DFromFile  (HPDF_Doc     pdf,
@@ -96,6 +97,8 @@ HPDF_LoadU3DFromFile  (HPDF_Doc     pdf,
 	}
 	return image;
 }
+
+#endif /* CONFIG_LIBHARU_FILE_SUPPORT */
 
 HPDF_EXPORT(HPDF_Image)
 HPDF_LoadU3DFromMem (HPDF_Doc pdf,
@@ -1093,6 +1096,8 @@ HPDF_EXPORT(HPDF_JavaScript) HPDF_CreateJavaScript( HPDF_Doc pdf, const char *co
 	return javaScript;
 }
 
+#if CONFIG_LIBHARU_FILE_SUPPORT
+
 HPDF_EXPORT(HPDF_JavaScript) HPDF_LoadJSFromFile  (HPDF_Doc pdf, const char *filename)
 {
 	HPDF_Stream js_data;
@@ -1155,5 +1160,7 @@ HPDF_EXPORT(HPDF_JavaScript) HPDF_LoadJSFromFile  (HPDF_Doc pdf, const char *fil
 
 	return js;
 }
+
+#endif /* CONFIG_LIBHARU_FILE_SUPPORT */
 
 #undef normalize

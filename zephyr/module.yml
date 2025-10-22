@@ -1,0 +1,4 @@
+name: libharu
+build:
+  cmake: .
+  kconfig: Kconfig
