@@ -374,8 +374,11 @@ Page_OnFree  (HPDF_Dict  obj)
     HPDF_PTRACE((" HPDF_Page_OnFree\n"));
 
     if (attr) {
-        if (attr->gstate)
-            HPDF_GState_Free (obj->mmgr, attr->gstate);
+        HPDF_GState gstate = attr->gstate;
+
+        /* Free the whole stack: an unbalanced GSave leaves saved states. */
+        while (gstate)
+            gstate = HPDF_GState_Free (obj->mmgr, gstate);
 
         HPDF_FreeMem (obj->mmgr, attr);
     }
