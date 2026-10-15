@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: Zlib
 # src/CMakeLists.txt
 #
 # Copyright (C) 2008  Werner Smekal

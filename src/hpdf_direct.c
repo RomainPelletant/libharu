@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: Zlib */
 #include "hpdf_conf.h"
 #include "hpdf_utils.h"
 #include "hpdf_objects.h"

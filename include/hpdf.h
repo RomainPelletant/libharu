@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: Zlib */
 /*
  * << Haru Free PDF Library 2.0.8 >> -- hpdf.h
  *

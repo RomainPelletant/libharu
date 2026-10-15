@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: Zlib */
 #define HPDF_MAJOR_VERSION 2
 #define HPDF_MINOR_VERSION 4
 #define HPDF_BUGFIX_VERSION 6

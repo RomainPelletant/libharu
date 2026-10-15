@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: Zlib */
 /* Define to 1 if you have the `png' library (-lpng). */
 #cmakedefine LIBHPDF_HAVE_LIBPNG
 

@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: Zlib */
 /*
  * << Haru Free PDF Library >> -- hpdf_number.c
  *
